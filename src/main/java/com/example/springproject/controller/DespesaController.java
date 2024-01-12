@@ -39,7 +39,8 @@ public class DespesaController {
 	@PutMapping("/{id}")
 	public ResponseEntity<Object> editar(@RequestBody DespesaEntity despesaEntity, @PathVariable Long id){
 		try {
-			return ResponseEntity.status(HttpStatus.OK).body(despesaService.editar(despesaEntity, despesaEntity.getId(), id));
+			despesaEntity.setId(id);
+			return ResponseEntity.status(HttpStatus.OK).body(despesaService.editar(despesaEntity, despesaEntity.getId()));
 		} catch (Exception ex){
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(ex.getMessage());
         }

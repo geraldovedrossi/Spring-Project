@@ -36,14 +36,11 @@ public class ReceitaService {
         return listaEntities;
     }
 	
-	public ReceitaEntity editar(ReceitaEntity receita, Long idJson, Long idPath) {
-		if(idJson == idPath) {
-			if(receitaRepository.existsById(idJson)) {
-				return receitaRepository.save(receita);
-			}
-			throw new EntityNotFoundException("Receita não encontrada");
+	public ReceitaEntity editar(ReceitaEntity receita, Long id) {
+		if(receitaRepository.existsById(id)) {
+			return receitaRepository.save(receita);
 		}
-		throw new EntityNotFoundException("Id do Path não corresponde ao Id do Json");
+		throw new EntityNotFoundException("Receita não encontrada");
 	}
     
     public void deletar(Long id) {
