@@ -60,7 +60,6 @@ public class ReceitaEntity {
 	public void setData(LocalDateTime data) {
 		this.data = data;
 	}
-
 	
 	
 }

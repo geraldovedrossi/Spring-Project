@@ -14,46 +14,46 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.example.springproject.model.ReceitaEntity;
-import com.example.springproject.service.ReceitaService;
+import com.example.springproject.model.DespesaEntity;
+import com.example.springproject.service.DespesaService;
 
 import lombok.extern.slf4j.Slf4j;
 
 @RestController
-@RequestMapping("/receitas")
+@RequestMapping("/despesas")
 @Slf4j
-public class ReceitaController {
-	
-	@Autowired 
-	private ReceitaService receitaService;
+public class DespesaController {
+
+	@Autowired
+	private DespesaService despesaService;
 	
 	@PostMapping
-	public ResponseEntity<Object> criar(@RequestBody ReceitaEntity receitaEntity){
+	public ResponseEntity<Object> criar(@RequestBody DespesaEntity despesaEntity){
 		try {
-			return ResponseEntity.status(HttpStatus.CREATED).body(receitaService.criar(receitaEntity));
+			return ResponseEntity.status(HttpStatus.CREATED).body(despesaService.criar(despesaEntity));
 		} catch (Exception ex){
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(ex.getMessage());
         }
 	}
 	
 	@PutMapping("/{id}")
-	public ResponseEntity<Object> editar(@RequestBody ReceitaEntity receitaEntity, @PathVariable Long id){
+	public ResponseEntity<Object> editar(@RequestBody DespesaEntity despesaEntity, @PathVariable Long id){
 		try {
-			return ResponseEntity.status(HttpStatus.OK).body(receitaService.editar(receitaEntity, receitaEntity.getId(), id));
+			return ResponseEntity.status(HttpStatus.OK).body(despesaService.editar(despesaEntity, despesaEntity.getId(), id));
 		} catch (Exception ex){
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(ex.getMessage());
         }
 	}
 	
 	@GetMapping
-	public ResponseEntity<List<ReceitaEntity>> listarTodos(){
-		return ResponseEntity.ok(receitaService.listarTodos());
+	public ResponseEntity<List<DespesaEntity>> listarTodos(){
+		return ResponseEntity.ok(despesaService.listarTodos());
 	}
 	
 	@GetMapping("/{id}")
 	public ResponseEntity<Object> ler(@PathVariable Long id){
 		try {
-			return ResponseEntity.ok(receitaService.ler(id));
+			return ResponseEntity.ok(despesaService.ler(id));
 		} catch (Exception ex){
 	        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(ex.getMessage());
 	    }
@@ -62,7 +62,7 @@ public class ReceitaController {
 	@DeleteMapping("/{id}")
 	public ResponseEntity<Object> deletar(@PathVariable Long id){
 		try {
-			receitaService.deletar(id);
+			despesaService.deletar(id);
 			return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
 		} catch (Exception ex){
 	        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(ex.getMessage());

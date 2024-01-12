@@ -23,10 +23,43 @@ public class DespesaEntity {
 	@Column(name = "descricao", nullable = false)
 	private String descricao;
 
-	@Column(name = "valor", nullable = false, length = 100)
+	@Column(name = "valor", nullable = false)
 	private BigDecimal valor;
 
 	@Column(name = "data", nullable = false)
 	private LocalDateTime data;
 
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+	public String getDescricao() {
+		return descricao;
+	}
+
+	public void setDescricao(String descricao) {
+		this.descricao = descricao;
+	}
+
+	public BigDecimal getValor() {
+		return valor;
+	}
+
+	public void setValor(BigDecimal valor) {
+		this.valor = valor;
+	}
+
+	public LocalDateTime getData() {
+		return data;
+	}
+
+	public void setData(LocalDateTime data) {
+		this.data = data;
+	}
+	
+	
 }
