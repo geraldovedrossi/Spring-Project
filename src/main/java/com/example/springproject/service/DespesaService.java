@@ -36,8 +36,8 @@ public class DespesaService {
         return listaEntities;
     }
 	
-	public DespesaEntity editar(DespesaEntity despesa, Long id) {
-		if(despesaRepository.existsById(id)) {
+	public DespesaEntity editar(DespesaEntity despesa) {
+		if(despesaRepository.existsById(despesa.getId())) {
 			return despesaRepository.save(despesa);
 		}
 		throw new EntityNotFoundException("Receita não encontrada");

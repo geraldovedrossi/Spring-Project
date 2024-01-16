@@ -40,7 +40,7 @@ public class DespesaController {
 	public ResponseEntity<Object> editar(@RequestBody DespesaEntity despesaEntity, @PathVariable Long id){
 		try {
 			despesaEntity.setId(id);
-			return ResponseEntity.status(HttpStatus.OK).body(despesaService.editar(despesaEntity, despesaEntity.getId()));
+			return ResponseEntity.status(HttpStatus.OK).body(despesaService.editar(despesaEntity));
 		} catch (Exception ex){
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(ex.getMessage());
         }

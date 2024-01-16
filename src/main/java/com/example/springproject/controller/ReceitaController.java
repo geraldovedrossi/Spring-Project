@@ -40,7 +40,7 @@ public class ReceitaController {
 	public ResponseEntity<Object> editar(@RequestBody ReceitaEntity receitaEntity, @PathVariable Long id){
 		try {
 			receitaEntity.setId(id);
-			return ResponseEntity.status(HttpStatus.OK).body(receitaService.editar(receitaEntity, receitaEntity.getId()));
+			return ResponseEntity.status(HttpStatus.OK).body(receitaService.editar(receitaEntity));
 		} catch (Exception ex){
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(ex.getMessage());
         }

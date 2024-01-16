@@ -36,8 +36,8 @@ public class ReceitaService {
         return listaEntities;
     }
 	
-	public ReceitaEntity editar(ReceitaEntity receita, Long id) {
-		if(receitaRepository.existsById(id)) {
+	public ReceitaEntity editar(ReceitaEntity receita) {
+		if(receitaRepository.existsById(receita.getId())) {
 			return receitaRepository.save(receita);
 		}
 		throw new EntityNotFoundException("Receita não encontrada");
