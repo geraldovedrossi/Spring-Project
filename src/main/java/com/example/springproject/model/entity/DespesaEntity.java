@@ -1,7 +1,10 @@
-package com.example.springproject.model;
+package com.example.springproject.model.entity;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
+import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collectors;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -28,6 +31,20 @@ public class DespesaEntity {
 
 	@Column(name = "data", nullable = false)
 	private LocalDateTime data;
+	
+	@Column(name = "categoria", nullable = true)
+	private String categoria;
+	
+	private enum Categorias {
+		Alimentação,
+		Saúde,
+		Moradia,
+		Transporte,
+		Educação,
+		Lazer,
+		Imprevistos,
+		Outras
+	}
 
 	public Long getId() {
 		return id;
@@ -60,6 +77,36 @@ public class DespesaEntity {
 	public void setData(LocalDateTime data) {
 		this.data = data;
 	}
+
+	public String getCategoria() {
+		return categoria;
+	}
+
+	public void setCategoria(String categoria) {
+		this.categoria = categoria;
+	}
 	
+	public boolean containsCategoria(String value) {
+        for (Categorias categoria : Categorias.values()) {
+            if (categoria.name().equalsIgnoreCase(value)) {
+                return true;
+            }
+        }
+        return false;
+    }
 	
+	/*
+	public boolean containsCategoriaByIndex(int index) {
+	    for (Categorias categoria : Categorias.values()) {
+	        if (categoria.ordinal() == index) {
+	            return true;
+	        }
+	    }
+	    return false;
+	}
+	*/
+	
+	public List<String> AllCategorias() {
+		return Arrays.stream(Categorias.values()).map(Enum::toString).collect(Collectors.toList());
+	}
 }

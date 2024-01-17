@@ -1,12 +1,15 @@
 package com.example.springproject.service;
 
+import java.time.LocalDateTime;
+import java.time.Month;
+import java.time.Year;
 import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.example.springproject.model.ReceitaEntity;
+import com.example.springproject.model.entity.ReceitaEntity;
 import com.example.springproject.repository.ReceitaRepository;
 
 import jakarta.persistence.EntityNotFoundException;
@@ -35,6 +38,18 @@ public class ReceitaService {
         List<ReceitaEntity> listaEntities = receitaRepository.findAll();
         return listaEntities;
     }
+	
+	public List<ReceitaEntity> listarPelaDescricao(String descricao) {
+		List<ReceitaEntity> listaEntities = receitaRepository.findAllByDescricaoContainingIgnoreCase(descricao);
+		return listaEntities;
+	}
+	
+	public List<ReceitaEntity> listarPorAnoMes(int ano, int mes) {
+		LocalDateTime data1 = LocalDateTime.of(ano, Month.of(mes), 1, 0, 0);
+		LocalDateTime data2 = LocalDateTime.of(ano, Month.of(mes), Month.of(mes).length(Year.of(ano).isLeap()), 0, 0);
+		List<ReceitaEntity> listaEntities = receitaRepository.findAllByDataBetween(data1, data2);
+		return listaEntities;
+	}
 	
 	public ReceitaEntity editar(ReceitaEntity receita) {
 		if(receitaRepository.existsById(receita.getId())) {

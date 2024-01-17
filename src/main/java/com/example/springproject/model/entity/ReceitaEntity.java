@@ -1,4 +1,4 @@
-package com.example.springproject.model;
+package com.example.springproject.model.entity;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;

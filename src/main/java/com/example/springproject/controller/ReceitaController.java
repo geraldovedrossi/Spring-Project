@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.example.springproject.model.ReceitaEntity;
+import com.example.springproject.model.entity.ReceitaEntity;
 import com.example.springproject.service.ReceitaService;
 
 import lombok.extern.slf4j.Slf4j;
@@ -58,6 +58,16 @@ public class ReceitaController {
 		} catch (Exception ex){
 	        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(ex.getMessage());
 	    }
+	}
+	
+	@GetMapping("/descricao={descricao}")
+	public ResponseEntity<List<ReceitaEntity>> listarPelaDescricao(@PathVariable String descricao){
+		return ResponseEntity.ok(receitaService.listarPelaDescricao(descricao));
+	}
+	
+	@GetMapping("/{ano}/{mes}")
+	public ResponseEntity<List<ReceitaEntity>> listarPelaDescricao(@PathVariable int ano, @PathVariable int mes){
+		return ResponseEntity.ok(receitaService.listarPorAnoMes(ano, mes));
 	}
 	
 	@DeleteMapping("/{id}")

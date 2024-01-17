@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.example.springproject.model.DespesaEntity;
+import com.example.springproject.model.entity.DespesaEntity;
 import com.example.springproject.service.DespesaService;
 
 import lombok.extern.slf4j.Slf4j;
@@ -26,6 +26,11 @@ public class DespesaController {
 
 	@Autowired
 	private DespesaService despesaService;
+	
+	@GetMapping("/categorias")
+	public  ResponseEntity<Object> listarCategorias(){
+		return ResponseEntity.status(HttpStatus.OK).body(despesaService.listarTodasCategorias());
+	}
 	
 	@PostMapping
 	public ResponseEntity<Object> criar(@RequestBody DespesaEntity despesaEntity){
@@ -58,6 +63,16 @@ public class DespesaController {
 		} catch (Exception ex){
 	        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(ex.getMessage());
 	    }
+	}
+	
+	@GetMapping("/descricao={descricao}")
+	public ResponseEntity<List<DespesaEntity>> listarPelaDescricao(@PathVariable String descricao){
+		return ResponseEntity.ok(despesaService.listarPelaDescricao(descricao));
+	}
+	
+	@GetMapping("/{ano}/{mes}")
+	public ResponseEntity<List<DespesaEntity>> listarPelaDescricao(@PathVariable int ano, @PathVariable int mes){
+		return ResponseEntity.ok(despesaService.listarPorAnoMes(ano, mes));
 	}
 	
 	@DeleteMapping("/{id}")
