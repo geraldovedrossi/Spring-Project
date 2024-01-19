@@ -64,7 +64,13 @@ public class DespesaService {
 	
 	public DespesaEntity editar(DespesaEntity despesa) {
 		if(despesaRepository.existsById(despesa.getId())) {
-			return despesaRepository.save(despesa);
+			if(despesa.getCategoria() == null) {
+				despesa.setCategoria("Outras");
+			}
+			if(despesa.containsCategoria(despesa.getCategoria())) {
+				return despesaRepository.save(despesa);
+			}
+			throw new EntityNotFoundException("Categoria inválida");
 		}
 		throw new EntityNotFoundException("Receita não encontrada");
 	}
